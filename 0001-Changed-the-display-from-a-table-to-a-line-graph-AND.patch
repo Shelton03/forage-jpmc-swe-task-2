@@ -1,0 +1,52 @@
+From aa9984fbcd93720c6143edb697cc9ed5cc80db48 Mon Sep 17 00:00:00 2001
+From: Shelton Mutambirwa <sheltonmutambirwa@gmail.com>
+Date: Fri, 13 Sep 2024 17:47:39 +0200
+Subject: [PATCH] Changed the display from a table to a line graph AND ensured
+ contious querying for data on a single click
+
+---
+ src/App.tsx   | 4 ++--
+ src/Graph.tsx | 5 ++---
+ 2 files changed, 4 insertions(+), 5 deletions(-)
+
+diff --git a/src/App.tsx b/src/App.tsx
+index e5d9195..d9fc655 100755
+--- a/src/App.tsx
++++ b/src/App.tsx
+@@ -8,7 +8,7 @@ import './App.css';
+  */
+ interface IState {
+   data: ServerRespond[],
+-  showGraph: boolean
++  showGraph: boolean,
+ }
+ 
+ /**
+@@ -52,7 +52,7 @@ class App extends Component<{}, IState> {
+         clearInterval(interval);
+       }
+     },100);                  
+-  };
++  }
+ 
+   /**
+    * Render the App react component
+diff --git a/src/Graph.tsx b/src/Graph.tsx
+index 96e0026..cf6bed3 100644
+--- a/src/Graph.tsx
++++ b/src/Graph.tsx
+@@ -52,9 +52,8 @@ class Graph extends Component<IProps, {}> {
+       elem.setAttribute('view','y_line');
+       elem.setAttribute('column-pivots','["stock"]');
+       elem.setAttribute('row-pivots', '["timestamp"]');
+-      elem.setAttribute('columns','["top-ask-price"]');
+-      elem.setAttribute('aggregates',
+-        '{"stock":"discount count","top-ask-price":"avg","top-bid-price":"avg","timestamp":"distinct  count"}');
++      elem.setAttribute('columns','["top_ask_price"]');
++      elem.setAttribute('aggregates','{"stock":"discount count","top_ask_price":"avg","top_bid_price":"avg","timestamp":"distinct  count"}');
+       elem.load(this.table);
+     }
+   }
+-- 
+2.45.1.windows.1
+
